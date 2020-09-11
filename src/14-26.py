@@ -211,7 +211,7 @@ def prob19():
     print('\33[91;1m', "runtime = ", str(time() - t_start), "s", '\33[0m', sep="")
 
 
-# 20.
+# 20.  Find the sum of the digits in the number 100!
 
 def prob20():
     t_start = time()
@@ -237,7 +237,7 @@ def prob20():
     print('\33[91;1m', "runtime = ", str(time() - t_start), "s", '\33[0m', sep="")
 
 
-# 21.  Find the sum of the digits in the number 100!
+# 21.
 
 def prob21():
     t_start = time()
