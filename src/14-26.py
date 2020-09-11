@@ -12,8 +12,7 @@ def prob14():
     t_start = time()
 
     i = 1
-    i_max = 0
-    n_values = []
+    i_max, n_max = 0, 0
     for n in range(2, 1000000):
         n_current = n
         while n != 1:
@@ -45,16 +44,16 @@ def prob14_2():
 
     def check(number):
         count = 0
-        while (True):
+        while True:
             try:
-                if (list[number] != 0 & number != 1):
-                    return count + list[number]
-            except:
+                if n_list[number] != 0 & number != 1:
+                    return count + n_list[number]
+            except IndexError:
                 pass
 
             if number == 1:
-                list[number] = count + list[number]
-                return count + list[number]
+                n_list[number] = count + n_list[number]
+                return count + n_list[number]
 
             if number % 2 == 0:
                 number = int(number / 2)
@@ -64,11 +63,11 @@ def prob14_2():
                 count += 1
 
     n = 1000000
-    list = [0] * n
+    n_list = [0] * n
     for i in range(1, n):
-        list[i] = (check(i))
+        n_list[i] = (check(i))
 
-    print('\33[32m', 'Longest chain = {} ({})'.format(list.index(max(list))), '\33[0m', sep="")
+    print('\33[32m', 'Longest chain = {}'.format(n_list.index(max(n_list))), '\33[0m', sep="")
     print('\33[91;1m', "runtime = ", str(time() - t_start), "s", '\33[0m', sep="")
 
 
@@ -90,14 +89,14 @@ def prob16():
     t_start = time()
 
     digits = 2 ** 1000
-    sum = 0
+    digits_sum = 0
 
     while digits > 9:
-        sum += digits % 10
+        digits_sum += digits % 10
         digits //= 10
-    sum += digits
+    digits_sum += digits
 
-    print('\33[32m', 'Sum of all digits in 2^1000 = {}'.format(sum), '\33[0m', sep="")
+    print('\33[32m', 'Sum of all digits in 2^1000 = {}'.format(digits_sum), '\33[0m', sep="")
     print('\33[91;1m', "runtime = ", str(time() - t_start), "s", '\33[0m', sep="")
 
 
@@ -111,15 +110,15 @@ def prob17():
         teens = [3, 6, 6, 8, 8, 7, 7, 9, 8, 8]
         tenths = [0, 3, 6, 6, 5, 5, 5, 7, 6, 6]
 
-        def hundreds(input):
-            hundreth = input // 100
-            tenths_units = input % 100
+        def hundreds(j):
+            hundredth = j // 100
+            tenths_units = j % 100
             if tenths_units == 0:
-                return units[hundreth] + 7
-            elif tenths_units < 20 and tenths_units >= 10:
-                return teens[tenths_units % 10] + units[hundreth] + 10
+                return units[hundredth] + 7
+            elif 20 > tenths_units >= 10:
+                return teens[tenths_units % 10] + units[hundredth] + 10
             else:
-                return units[(tenths_units) % 10] + tenths[(tenths_units) // 10] + units[hundreth] + 10
+                return units[tenths_units % 10] + tenths[tenths_units // 10] + units[hundredth] + 10
 
         letters = 0
 
@@ -139,11 +138,11 @@ def prob17():
         return letters
 
     n_max = 1000
-    sum = 0
+    n_sum = 0
     for i in range(n_max):
-        sum += counter(i + 1)
+        n_sum += counter(i + 1)
 
-    print('\33[32m', 'Sum of all letters in numbers < {} = {}'.format(n_max, sum), '\33[0m', sep="")
+    print('\33[32m', 'Sum of all letters in numbers < {} = {}'.format(n_max, n_sum), '\33[0m', sep="")
     print('\33[91;1m', "runtime = ", str(time() - t_start), "s", '\33[0m', sep="")
 
 
@@ -216,24 +215,23 @@ def prob19():
 def prob20():
     t_start = time()
 
-    def factorial(n):
-        fact = n
-        for i in range(n):
-            fact *= n - i
+    def my_factorial(i):
+        fact = i
+        for i in range(i):
+            fact *= i - i
         return fact
 
-
     def digits_sum(digits):
-        sum = 0
+        total = 0
         while digits > 9:
-            sum += digits % 10
+            total += digits % 10
             digits //= 10
-        sum += digits
-        return sum
+        total += digits
+        return total
 
     n = 100
 
-    print('\33[32m', 'Sum of all digits in {}! = {}'.format(n, digits_sum(factorial(n))), '\33[0m', sep="")
+    print('\33[32m', 'Sum of all digits in {}! = {}'.format(n, digits_sum(my_factorial(n))), '\33[0m', sep="")
     print('\33[91;1m', "runtime = ", str(time() - t_start), "s", '\33[0m', sep="")
 
 
@@ -241,6 +239,7 @@ def prob20():
 
 def prob21():
     t_start = time()
+
 
 """
 print('\n', '\33[94;1m', "Problem 14 (v1):", '\33[0m')
