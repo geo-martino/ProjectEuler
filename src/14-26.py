@@ -1,4 +1,4 @@
-from math import factorial
+from math import factorial, sqrt
 from time import time
 
 
@@ -235,9 +235,44 @@ def prob20():
     print('\33[91;1m', "runtime = ", str(time() - t_start), "s", '\33[0m', sep="")
 
 
-# 21.
+# 21.  Evaluate the sum of all the amicable numbers under 10000.
 
 def prob21():
+    t_start = time()
+
+    def factor_sum(k):
+        factor_tot = 1
+        max = int(k ** 0.5)
+        for j in range(2, max):
+            if k % j == 0:
+                factor_tot += j + (k // j)
+
+        return factor_tot
+
+    n = 10000
+    attempt = [0] * n
+    total = 0
+
+    for i in range(4, n):
+        fsum = factor_sum(i)
+        if i == factor_sum(fsum) and i != fsum:
+            attempt[i] = 1
+            attempt[fsum] = 1
+        else:
+            attempt[i] = 2
+
+    for i in range(n):
+        if attempt[i] == 1:
+            total += i
+            print(i, "--", factor_sum(i))
+    print(attempt)
+    print('\33[32m', 'Sum of all amicable numbers <{} = {}'.format(n, total), '\33[0m', sep="")
+    print('\33[91;1m', 'runtime = {}'.format(str(time() - t_start)), "s", '\33[0m', sep="")
+
+
+# 22. What is the total of all the name scores in the file?
+
+def prob22():
     t_start = time()
 
 
@@ -258,6 +293,8 @@ print('\n', '\33[94;1m', "Problem 19:", '\33[0m')
 prob19()
 print('\n', '\33[94;1m', "Problem 20:", '\33[0m')
 prob20()
-"""
 print('\n', '\33[94;1m', "Problem 21:", '\33[0m')
 prob21()
+"""
+print('\n', '\33[94;1m', "Problem 22:", '\33[0m')
+prob22()
