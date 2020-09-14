@@ -8,7 +8,7 @@ from time import time
 # 14. Which starting number, under one million, produces the longest chain?
 
 
-def prob14():
+def p14():
     t_start = time()
 
     i = 1
@@ -39,7 +39,7 @@ def prob14():
     print('\33[91;1m', "runtime = ", str(time() - t_start), "s", '\33[0m', sep="")
 
 
-def prob14_2():
+def p14_2():
     t_start = time()
 
     def check(number):
@@ -73,7 +73,7 @@ def prob14_2():
 
 # 15. How many routes are there through a 20×20 grid?
 
-def prob15():
+def p15():
     t_start = time()
 
     size = 20
@@ -85,7 +85,7 @@ def prob15():
 
 # 16. What is the sum of the digits of the number 2^1000?
 
-def prob16():
+def p16():
     t_start = time()
 
     digits = 2 ** 1000
@@ -102,7 +102,7 @@ def prob16():
 
 # 17. If all the numbers from 1 to 1000 (one thousand) inclusive were written out in words, how many letters would be used?
 
-def prob17():
+def p17():
     t_start = time()
 
     def counter(number):
@@ -148,7 +148,7 @@ def prob17():
 
 # 18. Find the maximum total from top to bottom of the triangle below:
 
-def prob18():
+def p18():
     t_start = time()
 
     numbers = [[75],
@@ -180,7 +180,7 @@ def prob18():
 
 # 19. How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
 
-def prob19():
+def p19():
     t_start = time()
 
     day = 2
@@ -212,7 +212,7 @@ def prob19():
 
 # 20.  Find the sum of the digits in the number 100!
 
-def prob20():
+def p20():
     t_start = time()
 
     def my_factorial(i):
@@ -237,7 +237,7 @@ def prob20():
 
 # 21.  Evaluate the sum of all the amicable numbers under 10000.
 
-def prob21():
+def p21():
     t_start = time()
 
     def factor_sum(k):
@@ -265,36 +265,85 @@ def prob21():
         if attempt[i] == 1:
             total += i
             print(i, "--", factor_sum(i))
-    print(attempt)
+
     print('\33[32m', 'Sum of all amicable numbers <{} = {}'.format(n, total), '\33[0m', sep="")
     print('\33[91;1m', 'runtime = {}'.format(str(time() - t_start)), "s", '\33[0m', sep="")
 
 
 # 22. What is the total of all the name scores in the file?
 
-def prob22():
+def p22():
+    t_start = time()
+    """
+    def merge(left, right):
+        if len(left) == 0:
+            return right
+        if len(right) == 0:
+            return left
+
+        result = []
+        index_left = index_right = 0
+
+        while len(result) < len(left) + len(right):
+            if left[index_left] <= right[index_right]:
+                result.append(left[index_left])
+                index_left += 1
+            else:
+                result.append(right[index_right])
+                index_right += 1
+
+            if index_right == len(right):
+                result += left[index_left:]
+                break
+
+            if index_left == len(left):
+                result += right[index_right:]
+                break
+
+        return result
+
+    def mergesort(array):
+        if len(array) < 2:
+            return array
+
+        mid = len(array) // 2
+        return merge(left = mergesort(array[:mid]), right = mergesort(array[mid:]))
+    """
+
+    with open('D:\Coding\ProjectEuler\\resources\p022_names.txt', 'r') as file:
+        names = sorted(file.read().replace('"', "").split(','))
+
+    total = 0
+    for i in range(len(names)):
+        total += sum([ord(names[i][j]) - ord('A') + 1 for j in range(len(names[i]))]) * (i + 1)
+
+    print('\33[32m', 'Sum of all names scores  = {}'.format(total), '\33[0m', sep="")
+    print('\33[91;1m', 'runtime = {}'.format(str(time() - t_start)), "s", '\33[0m', sep="")
+
+# 23. Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
+
+def p23():
     t_start = time()
 
-
-"""
 print('\n', '\33[94;1m', "Problem 14 (v1):", '\33[0m')
-prob14()
+p14()
 print('\n', '\33[94;1m', "Problem 14 (v2):", '\33[0m')
-prob14_2()
+p14_2()
 print('\n', '\33[94;1m', "Problem 15:", '\33[0m')
-prob15()
+p15()
 print('\n', '\33[94;1m', "Problem 16:", '\33[0m')
-prob16()
+p16()
 print('\n', '\33[94;1m', "Problem 17:", '\33[0m')
-prob17()
+p17()
 print('\n', '\33[94;1m', "Problem 18:", '\33[0m')
-prob18()
+p18()
 print('\n', '\33[94;1m', "Problem 19:", '\33[0m')
-prob19()
+p19()
 print('\n', '\33[94;1m', "Problem 20:", '\33[0m')
-prob20()
+p20()
 print('\n', '\33[94;1m', "Problem 21:", '\33[0m')
-prob21()
-"""
+p21()
 print('\n', '\33[94;1m', "Problem 22:", '\33[0m')
-prob22()
+p22()
+print('\n', '\33[94;1m', "Problem 23:", '\33[0m')
+p23()
