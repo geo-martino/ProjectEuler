@@ -1,5 +1,6 @@
-from math import factorial, sqrt
 from time import time
+from math import factorial
+from functools import reduce
 
 
 # from numpy import sum, int64
@@ -325,6 +326,36 @@ def p22():
 def p23():
     t_start = time()
 
+    def factor_sum(k):
+        factor_tot = 1
+        max = int(k ** 0.5) + 1
+        for j in range(2, max):
+            if k % j == 0:
+                factor_tot += j + (k // j)
+
+        return factor_tot
+
+    numbers = []
+    add = [1] * (28123 * 2)
+    for i in range(12, 28123):
+        test = factor_sum(i)
+        if test > i:
+            numbers.append(i)
+    for j in range(len(numbers)):
+        for k in range(len(numbers)):
+            add[numbers[j] + numbers[k]] = 0
+    print(add[23:25])
+
+    total = 0
+    for i in range(1, 28123):
+        if add[i] == 1:
+            print(i)
+            total += i
+
+    print(total)
+
+
+"""
 print('\n', '\33[94;1m', "Problem 14 (v1):", '\33[0m')
 p14()
 print('\n', '\33[94;1m', "Problem 14 (v2):", '\33[0m')
@@ -345,5 +376,6 @@ print('\n', '\33[94;1m', "Problem 21:", '\33[0m')
 p21()
 print('\n', '\33[94;1m', "Problem 22:", '\33[0m')
 p22()
+"""
 print('\n', '\33[94;1m', "Problem 23:", '\33[0m')
 p23()
