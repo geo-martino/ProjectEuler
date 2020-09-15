@@ -1,6 +1,5 @@
-from time import time
 from math import factorial
-from functools import reduce
+from time import time
 
 
 # from numpy import sum, int64
@@ -321,38 +320,43 @@ def p22():
     print('\33[32m', 'Sum of all names scores  = {}'.format(total), '\33[0m', sep="")
     print('\33[91;1m', 'runtime = {}'.format(str(time() - t_start)), "s", '\33[0m', sep="")
 
+
 # 23. Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
 
 def p23():
     t_start = time()
 
-    def factor_sum(k):
-        factor_tot = 1
-        max = int(k ** 0.5) + 1
-        for j in range(2, max):
-            if k % j == 0:
-                factor_tot += j + (k // j)
+    def factor_sum(n):
+        factors = [1]
+        for j in range(2, int(n ** 0.5) + 1):
+            if n % j == 0:
+                factors.extend([j, n // j])
 
-        return factor_tot
+        return sum(list(set(factors)))
 
-    numbers = []
-    add = [1] * (28123 * 2)
-    for i in range(12, 28123):
+    upper = 28123
+    ab = []
+    total = list(range(upper))
+
+    for i in range(12, upper):
         test = factor_sum(i)
         if test > i:
-            numbers.append(i)
-    for j in range(len(numbers)):
-        for k in range(len(numbers)):
-            add[numbers[j] + numbers[k]] = 0
-    print(add[23:25])
+            ab.append(i)
 
-    total = 0
-    for i in range(1, 28123):
-        if add[i] == 1:
-            print(i)
-            total += i
+    for j in range(len(ab)):
+        for k in range(j, len(ab)):
+            if ab[j] + ab[k] < upper:
+                total[ab[j] + ab[k]] = 0
+            else:
+                break
 
-    print(total)
+    print('\33[32m', 'Sum = {}'.format(sum(total)), '\33[0m', sep="")
+    print('\33[91;1m', 'runtime = {}'.format(str(time() - t_start)), "s", '\33[0m', sep="")
+
+# 24. What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
+
+def p24():
+    t_start = time()
 
 
 """
@@ -376,6 +380,8 @@ print('\n', '\33[94;1m', "Problem 21:", '\33[0m')
 p21()
 print('\n', '\33[94;1m', "Problem 22:", '\33[0m')
 p22()
-"""
 print('\n', '\33[94;1m', "Problem 23:", '\33[0m')
 p23()
+"""
+print('\n', '\33[94;1m', "Problem 24:", '\33[0m')
+p24()
