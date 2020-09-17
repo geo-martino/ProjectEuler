@@ -353,10 +353,37 @@ def p23():
     print('\33[32m', 'Sum = {}'.format(sum(total)), '\33[0m', sep="")
     print('\33[91;1m', 'runtime = {}'.format(str(time() - t_start)), "s", '\33[0m', sep="")
 
+
 # 24. What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
 
 def p24():
     t_start = time()
+
+
+# 25. What is the index of the first term in the Fibonacci sequence to contain 1000 digits?
+
+def p25():
+    t_start = time()
+
+    k = 0
+    i = j = index = 1
+    digits = 1000
+    while len(str(k + i)) < digits:
+        k += i
+        i = j
+        j = k
+        index += 1
+    index += 1
+
+    print('\33[32m', 'Index of Fibonacci term with >{} digits = {}'.format(digits, index), '\33[0m', sep="")
+    print('\33[91;1m', 'runtime = {}'.format(str(time() - t_start)), "s", '\33[0m', sep="")
+
+
+# 26. Find the value of d < 1000 for which 1/d contains the longest recurring cycle in its decimal fraction part.
+
+def p26():
+    t_start = time()
+
 
 
 """
@@ -385,3 +412,7 @@ p23()
 """
 print('\n', '\33[94;1m', "Problem 24:", '\33[0m')
 p24()
+#print('\n', '\33[94;1m', "Problem 25:", '\33[0m')
+#p25()
+print('\n', '\33[94;1m', "Problem 26:", '\33[0m')
+p26()
