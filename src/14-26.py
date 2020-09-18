@@ -264,7 +264,6 @@ def p21():
     for i in range(n):
         if attempt[i] == 1:
             total += i
-            print(i, "--", factor_sum(i))
 
     print('\33[32m', 'Sum of all amicable numbers <{} = {}'.format(n, total), '\33[0m', sep="")
     print('\33[91;1m', 'runtime = {}'.format(str(time() - t_start)), "s", '\33[0m', sep="")
@@ -359,8 +358,33 @@ def p23():
 def p24():
     t_start = time()
 
+    def getPermutations(a):
+        if len(a) == 1:
+            yield a
+        else:
+            for i in range(len(a)):
+                # print(a[i], a[:i], a[i + 1:])
+                this = a[i]
+                rest = a[:i] + a[i + 1:]
+                for p in getPermutations(rest):
+                    yield [this] + p
+
+    digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    index = 0
+    answer = 0
+    for k in getPermutations(digits):
+        index += 1
+        if index == 1000000:
+            s = [str(i) for i in k]
+            answer = int("".join(s))
+            break
+
+    print('\33[32m', 'Millionth index = {}'.format(answer), '\33[0m', sep="")
+    print('\33[91;1m', 'runtime = {}'.format(str(time() - t_start)), "s", '\33[0m', sep="")
+
 
 # 25. What is the index of the first term in the Fibonacci sequence to contain 1000 digits?
+
 
 def p25():
     t_start = time()
@@ -384,11 +408,15 @@ def p25():
 def p26():
     t_start = time()
 
+    lst = []
+    for d in range(1, 1000):
+        lst.append(1/d * 10**(len(str(d)) - 1))
+    lst = list(enumerate(lst, 1))
+    print(lst)
 
 
-"""
-print('\n', '\33[94;1m', "Problem 14 (v1):", '\33[0m')
-p14()
+#print('\n', '\33[94;1m', "Problem 14 (v1):", '\33[0m')
+#p14()
 print('\n', '\33[94;1m', "Problem 14 (v2):", '\33[0m')
 p14_2()
 print('\n', '\33[94;1m', "Problem 15:", '\33[0m')
@@ -409,10 +437,9 @@ print('\n', '\33[94;1m', "Problem 22:", '\33[0m')
 p22()
 print('\n', '\33[94;1m', "Problem 23:", '\33[0m')
 p23()
-"""
 print('\n', '\33[94;1m', "Problem 24:", '\33[0m')
 p24()
-#print('\n', '\33[94;1m', "Problem 25:", '\33[0m')
-#p25()
+print('\n', '\33[94;1m', "Problem 25:", '\33[0m')
+p25()
 print('\n', '\33[94;1m', "Problem 26:", '\33[0m')
 p26()
